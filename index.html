@@ -5,15 +5,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Image Generator</title>
     <link rel = "stylesheet" href="style.css" />
+    <script defer src="script.js"></script>
 </head>
 <body>
     <div class="container">
         <header class="header">
             <div class="logo-wrapper">
-                <h1>AI Image Generator</h1>
+                <div class="logo">
+                </div>
+                <div class="title-group">
+                    <h1>AI Image Generator</h1>
+                    <p>Prototype UI – client-side only, no real model yet.</p>
+                </div>
             </div>
-
+            <div class="badge">
+                <span class="badge-dot"></span>
+                <span>Instant mockup</span>
+            </div>
         </header>
+
+        <main class="main">
+            <section class="panel">
+                <div class="panel-inner">
+                    <div class="panel-header">
+                        <h2>Describe your image</h2>
+                        <span>Prompt → Preview</span>
+                    </div>
+                    <form id="prompt-form">
+                        <div class="field-group">
+                            <div>
+                                <label for="prompt">Prompt</label>
+                                <textarea id="prompt" name="prompt" placeholder="e.g. A futuristic cityscape at dusk, ultra-detailed, cinematic lighting"></textarea>
+                                <p class="hint">This is a front-end demo only – generation is simulated in the browser.</p>
+                            </div>
+
+                            <div class="input-row">
+                                <div>
+                                    <label for="style">Style</label>
+                                    <select id="style" name="style">
+                                        <option value="cinematic">Cinematic</option>
+                                        <option value="digital-art">Digital art</option>
+                                        <option value="3d-render">3D render</option>
+                                        <option value="analog-film">Analog film</option>
+                                        <option value="anime">Anime</option>
+                                        <option value="line-art">Line art</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="steps">Detail (steps)</label>
+                                    <input id="steps" name="steps" type="number" min="5" max="50" value="28" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="actions">
+                            <button type="submit" id="generate-btn">
+                                <span class="button-dot"></span>
+                                <span class="button-text">
+                                    <span>Generate preview</span>
+                                    <span class="button-label-sub">Fake it locally</span>
+                                </span>
+                                <span class="keyboard-hint">⌘⏎</span>
+                            </button>
+                        </div>
+                        <p class="error-message" id="error"></p>
+                    </form>
+                </div>
+            </section>
+
+            <section class="panel">
+                <div class="panel-inner">
+                    <div class="panel-header">
+                        <h2>Preview</h2>
+                        <span>Client-side placeholder</span>
+                    </div>
+
+                    <div class="preview-shell">
+                        <div class="preview-header">
+                            <div class="traffic-lights">
+                                <span class="traffic-dot red"></span>
+                                <span class="traffic-dot amber"></span>
+                                <span class="traffic-dot green"></span>
+                            </div>
+                            <span class="preview-title">imggen.local • Placeholder canvas</span>
+                            <span class="preview-status-pill" id="preview-status">Idle</span>
+                        </div>
+                        <div class="preview-body">
+                            <div class="preview-image-wrapper">
+                                <div class="preview-image" id="preview-image">
+                                    Type a prompt and hit “Generate preview” to see a stylised mock image card here.
+                                </div>
+                                <div class="preview-loading" id="preview-loading">
+                                    <div class="spinner"></div>
+                                </div>
+                            </div>
+                            <div class="preview-meta">
+                                <span><span class="dot"></span><span id="preview-style">Style: –</span></span>
+                                <span><span class="dot"></span><span id="preview-steps">Steps: –</span></span>
+                                <span><span class="dot"></span><span id="preview-time">Last run: –</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
     </div>
 </body>
 </html>
