@@ -57,7 +57,11 @@ app.post("/generate", async (req, res) => {
     res.send(buffer);
   } catch (err) {
     console.error("Error calling Hugging Face Inference:", err);
-    res.status(500).json({ error: "Failed to generate image." });
+    const message =
+      err?.message ||
+      err?.error ||
+      "Failed to generate image. Please check your Hugging Face Inference access and model configuration.";
+    res.status(500).json({ error: message });
   }
 });
 

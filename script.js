@@ -72,24 +72,15 @@ const updateImageCard = (index, imageUrl) => {
                   </a>
                 </div>`;
 };
-// Choose proxy URL for local dev vs deployed (Vercel)
-const getProxyUrl = () => {
-  const host = window.location.hostname;
-  // On Vercel / production, use the serverless function path
-  if (host !== "localhost" && host !== "127.0.0.1") {
-    return "/api/generate";
-  }
-  // For local dev with Node server running on port 3000
-  return "http://localhost:3000/generate";
-};
-// Send requests to backend proxy to create images
+// Send requests to Hugging Face API to create images
 const generateImages = async (
   selectedModel,
   imageCount,
   aspectRatio,
   promptText,
 ) => {
-  const PROXY_URL = getProxyUrl();
+  // Call local proxy server instead of Hugging Face directly (avoids CORS and keeps API key secret)
+  const PROXY_URL = "http://localhost:3000/generate";
   const { width, height } = getImageDimensions(aspectRatio);
   generateBtn.setAttribute("disabled", "true");
   // Create an array of image generation promises
